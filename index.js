@@ -5,21 +5,33 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 var numeroDiInteriDaEsaminare = 0;
+var recursion = 0;
 rl.question('Inserisci quanti numeri interi vuoi esaminare? ', (input) => {
-    // TODO: Log the answer in a database
+
     console.log(`Esaminero ${input} numeri interi`);
 
     numeroDiInteriDaEsaminare = input;
 
-    LeggiINumeriDaEsaminare = (numeroDiInteriDaEsaminare) => {
+    response = {
+        multiplidiDue: 0,
+        multipliDiCinque: 0,
+        multipliDiDieci: 0,
+    };
+
+    LeggiINumeriDaEsaminare = () => {
+
         rl.question(`Inserisci il numero intero ${numeroDiInteriDaEsaminare}°: `, (numero) => {
             numeroDiInteriDaEsaminare = numeroDiInteriDaEsaminare - 1;
-            if (numeroDiInteriDaEsaminare == 0) return rl.close();
 
             console.log(`Hai inserito il numero: ${numero} `);
-
-            LeggiINumeriDaEsaminare(numeroDiInteriDaEsaminare);
+            if (numero % 2 == 0) response.multiplidiDue = response.multiplidiDue + 1;
+ 
+            if (numeroDiInteriDaEsaminare == 0) {
+                console.log(response);
+                return rl.close();
+            }
+            LeggiINumeriDaEsaminare();
         });
     };
-    LeggiINumeriDaEsaminare(numeroDiInteriDaEsaminare);
+    LeggiINumeriDaEsaminare();
 });

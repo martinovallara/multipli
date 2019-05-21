@@ -27,20 +27,21 @@ rl.question('Inserisci quanti numeri interi vuoi esaminare? ', (input) => {
     numeroDiInteriDaEsaminare = input;
     response = {
         multipliDiDue: new MultiploCounter(2),
-        multipliDiCinque: 0,
-        multipliDiDieci: 0,
-        IncrementaSeMultiploDiDue: function (numero) {
-            if (numero % 2 == 0) this.multipliDiDue = this.multipliDiDue + 1;
-        }
+        multipliDiCinque: new MultiploCounter(5),
+        multipliDiDieci: new MultiploCounter(10),
     };
 
     LeggiINumeriDaEsaminare = () => {
 
         rl.question(`Inserisci il numero intero ${numeroDiInteriDaEsaminare}°: `, (numero) => {
+            
             numeroDiInteriDaEsaminare = numeroDiInteriDaEsaminare - 1;
 
             console.log(`Hai inserito il numero: ${numero} `);
+
             response.multipliDiDue.IncrementaSeMultiplo(numero);
+            response.multipliDiCinque.IncrementaSeMultiplo(numero);
+            response.multipliDiDieci.IncrementaSeMultiplo(numero);
 
             if (numeroDiInteriDaEsaminare == 0) {
                 console.log(response);
